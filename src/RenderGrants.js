@@ -8,41 +8,33 @@ class RenderGrants extends Component {
       isActive: false
     };
   }
-  togggleClass = () => {
-    this.setSteat({ isActive: !this.state.isActive });
-  };
-  handleCopyrightString = () => {
+   //The function handles the written summary test.
+  toggleShow = () => {
     this.setState({ show: !this.state.show });
   };
+
   render() {
     console.log(this.props);
+    const { show } = this.state;
     const { grant } = this.props;
-    let grantName = grant.data.name;
-    let copywrittenSummary = grant.data.copywritten_summary;
-    let countryName = grant.data.country_name;
-    let issue = grant.data.issue;
+    const grantName = grant.data.name;
+    const copywrittenSummary = grant.data.copywritten_summary;
+    const countryName = grant.data.country_name;
+    const issue = grant.data.issue;
+    // let region = grant.data.region;
     let amountAward = grant.data.amount_awarded;
+    const MAX_CHAR = show === true ? copywrittenSummary.length : 70;
+    const summary = copywrittenSummary.substring(0, MAX_CHAR);
     return (
-      <div className="container">
-        <div className="container card card-title">
-          <div className="row ">
-            <div className="col-sm card-title">{grantName}</div>
-            <div
-              className={
-                this.state.show
-                  ? "col-sm  show-on"
-                  : "col-sm copy-write show-off"
-              }
-              onClick={this.handleCopyrightString}
-            >
-              {copywrittenSummary}
-            </div>
-            <div className="col-sm">{countryName}</div>
-            <div className="col-sm"> {issue}</div>
-            <div className="col-sm">{amountAward}</div>
-          </div>
-        </div>
-      </div>
+      <tbody>
+        <tr>
+          <td>{grantName}</td>
+          <td>{countryName}</td>
+          <td>{amountAward}</td>
+          <td>{issue}</td>
+          <td onClick={this.toggleShow}>{summary}</td>
+        </tr>
+      </tbody>
     );
   }
 }

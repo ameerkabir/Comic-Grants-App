@@ -32,21 +32,16 @@
 }
 body {
   /* background-color: #7F85DF; */
-  background: #4B51B0;
+  background: darkgray;
+}
+table > thead > tr > th {
+  width: "100px" !important;
 }
 
-.show-on {
-  overflow: auto;
-  height: 100%;
-  max-width: 75ch;
-  cursor: pointer;
+td {
+  width: 249px;
+  /* height: 299px; */
+  overflow-y: auto;
+  max-width: 230px;
+  max-height: 100%;
 }
-.show-off {
-  overflow: hidden;
-  height: 50px;
-  max-width: 75ch;
-  cursor: pointer;
-  
-  
-}
-/* change background when is off */
