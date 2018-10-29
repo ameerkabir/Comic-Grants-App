@@ -16,7 +16,7 @@ class App extends Component {
     e.preventDefault();
     try {
       const { postcode } = this.state;
-      const { lat, long } = await this.getLongitudeAndLaitude(postcode);
+      const { lat, long } = await this. getLongitudeAndLatitude(postcode);
       const response = await this.getAllGrantsByLatLong(lat, long);
       this.setState({ grants: response.data.grants });
     } catch (err) {
@@ -37,7 +37,7 @@ class App extends Component {
     console.error(err);
   };
 
-  getLongitudeAndLaitude = async postcode => {
+   getLongitudeAndLatitude = async postcode => {
     //get info from user postcode
     try {
       const convertUserData = await fetch(
@@ -58,10 +58,10 @@ class App extends Component {
 
   getAllGrantsByLatLong = async (lat, long, range = "15") => {
     try {
-      const fetechedUrl = await fetch(
+      const  fetchedUrl = await fetch(
         `https://1kfs7evxca.execute-api.eu-west-1.amazonaws.com/beta/grants-geo/?latitude=${lat}&longitude=${long}&range=${range}km`
       );
-      const response = await fetechedUrl.json();
+      const response = await  fetchedUrl.json();
       return response;
     } catch (err) {
       console.log(err);

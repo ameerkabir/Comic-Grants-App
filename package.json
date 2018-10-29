@@ -29,8 +29,11 @@
     "enzyme-to-json": "^3.3.4"
   },
   "jest": {
-
-      "snapshotSerializers": ["enzyme-to-json/serializer"]
-
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
+    ]
+  },
+  "engines": {
+    "node": ">= 6.9.0 <7.0.0 || >= 8.9.0"
   }
 }
