@@ -15,4 +15,4 @@ This app consumes comic Relief API and shows the user the grants within 15KM
 
 
 
-4: To start checking grants within 20KM from your area postcode use the search button and provide a valid postcode and click search and you will see all the grants.
+4: To start checking grants within 15KM from your area postcode use the search button and provide a valid postcode and click search and you will see all the grants.
