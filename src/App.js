@@ -31,7 +31,6 @@ class App extends Component {
         `https://api.postcodes.io/postcodes/${postcode}`
       );
       const response = await convertUserData.json();
-      //console.log({ response });
       //Latitude and Longitude from the api response
       let postcodeLat = response.result.latitude;
       let postcodeLong = response.result.longitude;
@@ -44,12 +43,7 @@ class App extends Component {
       throw new Error("Postcode is not valid");
     }
   };
-  //   getAllGrants = async () => {
-  //     const grandsUrl = await fetch("https://grants.sls.comicrelief.com/grants");
-  //     const response = await grandsUrl.json();
-  //     const grants = response.data.grants;
-  //     console.log(grants);
-  //   };
+
   getAllGrantsByLatLong = async (lat, long, range = "10") => {
     try {
       const fetechedUrl = await fetch(

@@ -30,3 +30,23 @@
     transform: rotate(360deg);
   }
 }
+body {
+  /* background-color: #7F85DF; */
+  background: #4B51B0;
+}
+
+.show-on {
+  overflow: auto;
+  height: 100%;
+  max-width: 75ch;
+  cursor: pointer;
+}
+.show-off {
+  overflow: hidden;
+  height: 50px;
+  max-width: 75ch;
+  cursor: pointer;
+  
+  
+}
+/* change background when is off */
