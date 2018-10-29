@@ -8,7 +8,7 @@ class RenderGrants extends Component {
       isActive: false
     };
   }
-   //The function handles the written summary test.
+  //The function handles the written summary test.
   toggleShow = () => {
     this.setState({ show: !this.state.show });
   };
@@ -21,8 +21,7 @@ class RenderGrants extends Component {
     const copywrittenSummary = grant.data.copywritten_summary;
     const countryName = grant.data.country_name;
     const issue = grant.data.issue;
-    // let region = grant.data.region;
-    let amountAward = grant.data.amount_awarded;
+    const amountAward = grant.data.amount_awarded;
     const MAX_CHAR = show === true ? copywrittenSummary.length : 70;
     const summary = copywrittenSummary.substring(0, MAX_CHAR);
     return (
