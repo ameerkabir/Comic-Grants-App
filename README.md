@@ -1,6 +1,6 @@
 # Comic relief Grants app
 
-This app consumes comic Relief API and shows the user the grants within 20KM
+This app consumes comic Relief API and shows the user the grants within 15KM
 
 #### setup
 
