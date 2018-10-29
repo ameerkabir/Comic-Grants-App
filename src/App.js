@@ -2,12 +2,14 @@ import React, { Component } from "react";
 import UserInput from "./UserInput";
 import Grants from "./Grants";
 import "./App.css";
+
 class App extends Component {
   state = {
     postcode: "",
     lat: "",
     long: "",
-    grants: []
+    grants: [],
+    hasError: false
   };
   setPostcode = e => {
     this.setState({ postcode: e.target.value });
@@ -16,28 +18,35 @@ class App extends Component {
     e.preventDefault();
     try {
       const { postcode } = this.state;
-      const { lat, long } = await this. getLongitudeAndLatitude(postcode);
+      const { lat, long } = await this.getLongitudeAndLatitude(postcode);
       const response = await this.getAllGrantsByLatLong(lat, long);
       this.setState({ grants: response.data.grants });
     } catch (err) {
-      this.setState({
-        hasError: true,
-        error: "Search did not complete"
-      });
+      this.logError(err);
     }
   };
+
   componentDidCatch(error, info) {
-    this.setState({
-      hasError: true,
-      error
-    });
-    this.logErrorToMyService(error, info);
+    this.logError(error, info);
   }
-  logErrorToMyService = err => {
+
+  logError = err => {
     console.error(err);
+    this.setState(
+      {
+        hasError: true
+      },
+      //clear the error
+      () =>
+        setTimeout(() => {
+          this.setState({
+            hasError: false
+          });
+        }, 2000)
+    );
   };
 
-   getLongitudeAndLatitude = async postcode => {
+  getLongitudeAndLatitude = async postcode => {
     //get info from user postcode
     try {
       const convertUserData = await fetch(
@@ -52,19 +61,19 @@ class App extends Component {
         long: postcodeLong
       };
     } catch (err) {
-      console.error("Postcode is not valid", err);
-    }
+      this.logError(err);
+    };
   };
 
   getAllGrantsByLatLong = async (lat, long, range = "15") => {
     try {
-      const  fetchedUrl = await fetch(
+      const fetchedUrl = await fetch(
         `https://1kfs7evxca.execute-api.eu-west-1.amazonaws.com/beta/grants-geo/?latitude=${lat}&longitude=${long}&range=${range}km`
       );
-      const response = await  fetchedUrl.json();
+      const response = await fetchedUrl.json();
       return response;
     } catch (err) {
-      console.log(err);
+      this.logError(err);
     }
   };
   render() {

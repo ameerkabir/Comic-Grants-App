@@ -7,7 +7,7 @@ class RenderGrants extends Component {
       show: false,
       isActive: false
     };
-  }
+  };
   //The function handles the written summary test.
   toggleShow = () => {
     this.setState({ show: !this.state.show });
@@ -35,6 +35,6 @@ class RenderGrants extends Component {
         </tr>
       </tbody>
     );
-  }
-}
+  };
+};
 export default RenderGrants;
