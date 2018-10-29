@@ -1,13 +1,14 @@
 import React from "react";
 import RenderGrants from "./RenderGrants";
-const Grants = ({ grants }) => {
+import TableHeader from "./TableHeader";
+const Grants = ({ grants, isActive, togggleClass }) => {
   return (
-    <div>
-      {grants.map(grant => (
-        <RenderGrants grant={grant} />
+    <table className="table table-dark">
+      <TableHeader />
+      {grants.map((grant, key) => (
+        <RenderGrants isActive={isActive} grant={grant} key={key} />
       ))}
-    </div>
+    </table>
   );
 };
-
 export default Grants;

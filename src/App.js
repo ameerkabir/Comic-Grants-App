@@ -20,10 +20,23 @@ class App extends Component {
       const response = await this.getAllGrantsByLatLong(lat, long);
       this.setState({ grants: response.data.grants });
     } catch (err) {
-      console.error(err.message);
-      throw new Error("Search did not complete");
+      this.setState({
+        hasError: true,
+        error: "Search did not complete"
+      });
     }
   };
+  componentDidCatch(error, info) {
+    this.setState({
+      hasError: true,
+      error
+    });
+    this.logErrorToMyService(error, info);
+  }
+  logErrorToMyService = err => {
+    console.error(err);
+  };
+
   getLongitudeAndLaitude = async postcode => {
     //get info from user postcode
     try {
@@ -39,12 +52,11 @@ class App extends Component {
         long: postcodeLong
       };
     } catch (err) {
-      console.error(err.message);
-      throw new Error("Postcode is not valid");
+      console.error("Postcode is not valid", err);
     }
   };
 
-  getAllGrantsByLatLong = async (lat, long, range = "10") => {
+  getAllGrantsByLatLong = async (lat, long, range = "15") => {
     try {
       const fetechedUrl = await fetch(
         `https://1kfs7evxca.execute-api.eu-west-1.amazonaws.com/beta/grants-geo/?latitude=${lat}&longitude=${long}&range=${range}km`
@@ -65,6 +77,12 @@ class App extends Component {
           search={this.search}
           setPostcode={this.setPostcode}
         />
+        {this.state.hasError ? (
+          <span className="text-danger">
+            There was an error performing your search, make sure you have a
+            valid postcode.
+          </span>
+        ) : null}
         <Grants grants={grants} />
       </div>
     );
@@ -72,5 +90,3 @@ class App extends Component {
 }
 
 export default App;
-
-///
