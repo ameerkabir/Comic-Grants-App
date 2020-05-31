@@ -14,7 +14,6 @@ class RenderGrants extends Component {
   };
 
   render() {
-    console.log(this.props);
     const { show } = this.state;
     const { grant } = this.props;
     const grantName = grant.data.name;
