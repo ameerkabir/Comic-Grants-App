@@ -3,6 +3,7 @@ import UserInput from "./UserInput";
 import Grants from "./Grants";
 import "./App.css";
 
+
 class App extends Component {
   state = {
     postcode: "",
@@ -14,7 +15,7 @@ class App extends Component {
   setPostcode = e => {
     this.setState({ postcode: e.target.value });
   };
-  search = async e => {
+  search = async e => {    
     e.preventDefault();
     try {
       const { postcode } = this.state;
@@ -50,7 +51,7 @@ class App extends Component {
     //get info from user postcode
     try {
       const convertUserData = await fetch(
-        `https://api.postcodes.io/postcodes/${postcode}`
+        `${process.env.REACT_APP_POSTCODE}${postcode}`
       );
       const response = await convertUserData.json();
       //Latitude and Longitude from the api response
@@ -64,11 +65,12 @@ class App extends Component {
       this.logError(err);
     };
   };
+  
 
   getAllGrantsByLatLong = async (lat, long, range = "15") => {
     try {
       const fetchedUrl = await fetch(
-        `https://1kfs7evxca.execute-api.eu-west-1.amazonaws.com/beta/grants-geo/?latitude=${lat}&longitude=${long}&range=${range}km`
+        `${process.env.REACT_APP_GRANS}/latitude=${lat}&longitude=${long}&range=${range}km`
       );
       const response = await fetchedUrl.json();
       return response;
